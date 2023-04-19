@@ -15,3 +15,10 @@ build-image:
 .PHONY: build
 build:
 	echo "Build binary from foundation-e2e repo..."
+
+
+test-performance:
+	rm -rf output/*
+	mkdir -p output
+	go test -c ./performance 
+	./performance.test -test.v -ginkgo.v --ginkgo.timeout=10h --cluster-count=20 --placement-count=20
